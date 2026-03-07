@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password,check_password
 import random
 from django.http import HttpResponse, JsonResponse
-from home.models import HostProfile , UserProfile
+from home.models import HostProfile , ParticipantProfile
 from host.models import Event
 import os
 from PIL import Image, ImageDraw, ImageFont
@@ -70,4 +70,56 @@ def generate_certificate(cer):
 # Create your views here.
 def home(request):
     return render(request, 'index.html')
+
+def otp(request):
+    if 'signup_data' not in request.session or 'otp' not in request.session:
+        return render(request, 'index.html')
+    if request.method == 'POST':
+        entered_otp = request.POST.get('otp')
+        session_otp = request.session.get('otp')
+        role=request.session['signup_data']['role']
+        if role == 'Host':
+            if entered_otp == session_otp:
+                signup_data = request.session.get('signup_data')
+                username = signup_data['username']
+                email = signup_data['email']
+                phone = signup_data['phone']
+                organization = signup_data['organization']
+                hashed_password = make_password(signup_data['password'])
+
+                # save to database
+                host_profile = HostProfile(username=username, email=email, phone=phone, organization=organization, password=hashed_password)
+                host_profile.save()
+
+                # create directory for host
+                host_directory = os.path.join(settings.BASE_DIR, 'files_data', 'host', str(host_profile.username))
+                os.makedirs(host_directory, exist_ok=True)
+
+                del request.session['signup_data']
+                del request.session['otp']
+                return JsonResponse({"status": "success"})
+            else:
+                return JsonResponse({"status": "error"})
+        if role == 'Participant':
+            if entered_otp == session_otp:
+                signup_data = request.session.get('signup_data')
+                username = signup_data['username']
+                email = signup_data['email']
+                phone = signup_data['phone']
+                college = signup_data['college']
+                year = signup_data['year']
+                hashed_password = make_password(signup_data['password'])
+
+                user_profile = ParticipantProfile(username=username, email=email, phone=phone, college=college, year=year, password=hashed_password)
+                user_profile.save()
+
+                user_directory = os.path.join(settings.BASE_DIR, 'files_data', 'user', str(user_profile.username))
+                os.makedirs(user_directory, exist_ok=True)
+
+                del request.session['signup_data']
+                del request.session['otp']
+                return JsonResponse({"status": "success"})
+            else:
+                return JsonResponse({"status": "error"})
+    return render(request, 'otp.html')
 

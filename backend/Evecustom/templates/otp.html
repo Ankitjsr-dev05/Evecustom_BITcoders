@@ -1,0 +1,206 @@
+{% load static %}
+<!doctype html>
+<html lang="en" class="h-full">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OTP Verification</title>
+
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link rel="stylesheet" href="{% static 'css/otp.css' %}">
+</head>
+
+<body class="h-full bg-gray-50">
+
+<div id="app-wrapper" class="h-full w-full flex items-center justify-center p-6 overflow-auto">
+<div class="w-full max-w-md">
+
+<div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+
+<div class="w-16 h-16 bg-indigo-50 rounded-2xl flex items-center justify-center mx-auto mb-6">
+<svg class="w-8 h-8 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z">
+</path>
+</svg>
+</div>
+
+<div class="text-center mb-8">
+<h1 class="text-2xl font-semibold text-gray-900 mb-2">Verify Your Identity</h1>
+<p class="text-gray-500 text-sm leading-relaxed">
+We've sent a 6-digit code to your email.<br>
+Enter it below to continue.
+</p>
+</div>
+
+<div class="flex justify-center gap-3 mb-6">
+<input type="text" maxlength="1" class="otp-input" inputmode="numeric">
+<input type="text" maxlength="1" class="otp-input" inputmode="numeric">
+<input type="text" maxlength="1" class="otp-input" inputmode="numeric">
+<input type="text" maxlength="1" class="otp-input" inputmode="numeric">
+<input type="text" maxlength="1" class="otp-input" inputmode="numeric">
+<input type="text" maxlength="1" class="otp-input" inputmode="numeric">
+</div>
+
+<p id="error-message" class="text-red-500 text-sm text-center mb-4 hidden">
+Invalid code. Please try again.
+</p>
+
+<div id="success-message" class="hidden text-center mb-4">
+<div class="inline-flex items-center gap-2 text-emerald-600">
+<span class="text-sm font-medium">Verification successful!</span>
+</div>
+</div>
+
+<button id="verify-btn"
+class="w-full py-3.5 rounded-xl text-white font-medium text-sm bg-indigo-600 disabled:opacity-50"
+disabled>
+Verify Code
+</button>
+
+<div class="mt-6 text-center">
+<p class="text-gray-500 text-sm">
+Didn't receive the code?
+<button id="resend-btn" class="font-medium text-indigo-600">Resend</button>
+</p>
+<p id="resend-timer" class="text-gray-400 text-xs mt-1 hidden">
+Resend available in <span id="timer-count">30</span>s
+</p>
+</div>
+
+</div>
+</div>
+</div>
+
+<script>
+
+const inputs = document.querySelectorAll('.otp-input');
+const verifyBtn = document.getElementById('verify-btn');
+const errorMsg = document.getElementById('error-message');
+const successMsg = document.getElementById('success-message');
+const resendBtn = document.getElementById('resend-btn');
+const resendTimer = document.getElementById('resend-timer');
+const timerCount = document.getElementById('timer-count');
+
+
+// ================= OTP INPUT =================
+
+inputs.forEach((input, index) => {
+
+input.addEventListener('input', (e) => {
+
+e.target.value = e.target.value.replace(/[^0-9]/g, '');
+
+if (e.target.value.length === 1 && index < inputs.length - 1) {
+inputs[index + 1].focus();
+}
+
+checkComplete();
+});
+
+input.addEventListener('keydown', (e) => {
+if (e.key === 'Backspace' && !e.target.value && index > 0) {
+inputs[index - 1].focus();
+}
+});
+
+});
+
+function checkComplete() {
+let filled = 0;
+inputs.forEach(input => {
+if (input.value.length === 1) filled++;
+});
+verifyBtn.disabled = filled !== 6;
+}
+
+
+// ================= VERIFY =================
+
+verifyBtn.addEventListener('click', () => {
+
+const code = Array.from(inputs).map(i => i.value).join('');
+verifyBtn.disabled = true;
+
+fetch("{% url 'otp' %}", {  // Adjust URL as needed
+method: "POST",
+headers: {
+"Content-Type": "application/x-www-form-urlencoded",
+"X-CSRFToken": getCookie("csrftoken")
+},
+body: `otp=${code}`
+})
+.then(res => res.json())
+.then(data => {
+
+if (data.status === "success") {
+
+successMsg.classList.remove('hidden');
+
+setTimeout(() => {
+window.location.href = "{% url 'login' %}"; // Redirect to login or dashboard after success
+}, 1500);
+
+} else {
+
+errorMsg.classList.remove('hidden');
+verifyBtn.disabled = false;
+}
+
+});
+
+});
+
+
+// ================= RESEND =================
+
+resendBtn.addEventListener('click', () => {
+
+resendBtn.classList.add('hidden');
+resendTimer.classList.remove('hidden');
+
+let count = 30;
+timerCount.textContent = count;
+
+const interval = setInterval(() => {
+count--;
+timerCount.textContent = count;
+
+if (count <= 0) {
+clearInterval(interval);
+resendBtn.classList.remove('hidden');
+resendTimer.classList.add('hidden');
+}
+}, 1000);
+
+inputs.forEach(inp => inp.value = '');
+verifyBtn.disabled = true;
+inputs[0].focus();
+
+});
+
+
+// ================= CSRF =================
+
+function getCookie(name) {
+let cookieValue = null;
+if (document.cookie && document.cookie !== '') {
+const cookies = document.cookie.split(';');
+for (let cookie of cookies) {
+cookie = cookie.trim();
+if (cookie.startsWith(name + '=')) {
+cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+break;
+}
+}
+}
+return cookieValue;
+}
+
+inputs[0].focus();
+
+</script>
+
+</body>
+</html>

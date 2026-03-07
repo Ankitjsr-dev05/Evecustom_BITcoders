@@ -12,8 +12,8 @@ class HostProfile(models.Model):
     def __str__(self):
         return self.username
     
-class UserProfile(models.Model):
-    role=models.CharField(max_length=100,default='user')
+class ParticipantProfile(models.Model):
+    role=models.CharField(max_length=100,default='participant')
     username = models.CharField(max_length=100)
     email = models.EmailField(max_length=254)
     phone=models.CharField(max_length=10)
