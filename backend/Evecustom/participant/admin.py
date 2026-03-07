@@ -1,3 +1,4 @@
 from django.contrib import admin
-
-# Register your models here.
+from participant.models import createteam, jointeam
+admin.site.register(createteam)
+admin.site.register(jointeam)
