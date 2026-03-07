@@ -131,3 +131,9 @@ def hostlogin(request):
 
 def signupportal(request):
     return render(request, 'signupportal.html')
+def partdas(request):
+    return render(request, 'partdas.html')
+def jointeam(request):
+    return render(request, 'jointeam.html')
+def createteam(request):
+    return render(request, 'createteam.html')

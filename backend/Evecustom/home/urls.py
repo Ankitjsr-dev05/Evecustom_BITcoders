@@ -6,5 +6,7 @@ urlpatterns = [
     path('participantsignup/', views.participantsignup, name='participantsignup'),
     path('hostlogin/', views.hostlogin, name='hostlogin'),
     path('signupportal/', views.signupportal, name='signupportal'),
-
+    path('partdas/', views.partdas, name='partdas'),
+    path('jointeam/', views.jointeam, name='jointeam'),
+    path('createteam/', views.createteam, name='createteam'),
 ]
