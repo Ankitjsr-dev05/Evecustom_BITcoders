@@ -9,4 +9,6 @@ urlpatterns = [
     path('partdas/', views.partdas, name='partdas'),
     path('jointeam/', views.jointeam, name='jointeam'),
     path('createteam/', views.createteam, name='createteam'),
+    path('hostsignup/', views.hostsignup, name='hostsignup'),
+
 ]
