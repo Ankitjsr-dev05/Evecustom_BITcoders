@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>signin page</title>
+    <link rel="stylesheet" href="{% static 'css/signup.css' %}">
+
+</head>
+
+ 
+
+<body class="c">
+    <div> <img src="{% static 'images/calender.png' %}" width="300px" height="300px" style="margin-top: 300px;">
+    </div>
+    <div class="box">
+
+        <div>
+            <h1>Create New Account</h1>
+            <form>
+                <label>Name:</label>
+                <input type="text" placeholder="enter your name"><br>
+                <label>Email:</label>
+                <input type="text" placeholder="enter email">
+                <label>Phone no:</label>
+                <input type="text" placeholder="enter phone number"><br>
+                <label>Organisation:</label>
+                <input type="text" placeholder="enter organising firm"><br>
+                <label>Password:</label>
+                <input type="text" placeholder="enter password"><br>
+                <label>Confirm Password:</label>
+                <input type="text" placeholder="confirm password"><br>
+            </form><br>
+
+            <div class="box1">
+                <h3>Already have an account?
+                    <a href="{% url 'hostlogin' %}">Login</a>
+                </h3>
+            </div>
+            <button type="submit">Sign-up</button><br>
+            
+        </div>
+    </div>
+
+</body>
+
+</html>

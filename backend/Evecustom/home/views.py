@@ -137,3 +137,6 @@ def jointeam(request):
     return render(request, 'jointeam.html')
 def createteam(request):
     return render(request, 'createteam.html')
+
+def hostsignup(request):
+    return render(request, 'hostsignup.html')
