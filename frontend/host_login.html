@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Host Login</title>
+    <link rel="stylesheet" href="host_login.css">
+</head>
+
+<body>
+
+        <h1>Welcome</h1>
+        <h1>Back</h1>
+
+    <div class="centerdata">
+        <h2>Fill details to login</h2>
+        <form action="/host_login" method="post">
+            <label for="username" class="form-label">Username:</label>
+            <input type="text" id="username" name="username" required><br><br>
+            <label for="password" class="form-label">Password:</label>
+            <input type="password" id="password" name="password" required><br><br>
+            <!-- <input type="submit" value="Login"> -->
+            <select name="role" id="role">
+                <label for="role" class="form-label">Select Role:</label>
+                <option value="host">Host</option>
+                <option value="admin">Participant</option>
+            </select>
+        </form>
+
+
+        <!-- <img src="calendar.png" alt="Login Image" class="login-image"> -->
+
+        <div class="no account">
+            <p>Don't have an account? <a href="#">Sign up here</a></p>
+        </div>
+
+        <button onclick="window.location.href='#'">Login</button>
+    </div>
+
+</body>
+
+</html>
