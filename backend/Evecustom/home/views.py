@@ -8,3 +8,5 @@ def participantsignup(request):
     return render(request, 'participantsignup.html')
 def partdas(request):
     return render(request, 'partdas.html')
+def jointeam(request):
+    return render(request, 'jointeam.html')
