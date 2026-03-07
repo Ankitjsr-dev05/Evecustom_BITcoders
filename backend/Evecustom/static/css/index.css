@@ -51,14 +51,7 @@ button:hover {
 }
 
 body {
-    background-color: #030132;
-    height: 100vh;
-    width: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    /* background: linear-gradient(20%, #FC6464 0%, #963B3B 100%);
-    background: radial-gradient(circle at 20% 20%, #633232, transparent 50%), radial-gradient(circle at 80% 80%, #8B298A, transparent 50%); */
+    border: 1px solid #000;
+    background: radial-gradient(194.86% 92.59% at 50% -8.47%, rgba(99, 50, 50, 0.00) 50.48%, rgba(139, 41, 138, 0.20) 56.25%, rgba(140, 90, 90, 0.00) 59.13%), linear-gradient(180deg, rgba(252, 100, 100, 0.00) 0%, rgba(150, 59, 59, 0.20) 92.1%), #030132;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
 }
-
