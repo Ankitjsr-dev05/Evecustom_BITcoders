@@ -1,0 +1,57 @@
+h1 {
+    display: flex;
+    justify-content: center;
+    color: white;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 96px;
+}
+
+h2 {
+    display: flex;
+    justify-content: center;
+    color: white;
+    margin-top: 10px;
+    font-size: 48px;
+}
+
+.landing-image {
+    display: block;
+    margin: 20px auto;
+    max-width: 80%;
+    height: auto;
+    position: relative;
+    z-index: 1;
+    y: 20px;
+    x: 0px;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    margin-top: 20px;
+}
+
+button {
+    padding: 10px 30px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    background-color: #FF4DB8;
+    color: white;
+    border-radius: 20px;
+    border-width: 64px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #FF66CC;
+    box-shadow: 0 0 10px #FF66CC;
+}
+
+body {
+    border: 1px solid #000;
+    background: radial-gradient(194.86% 92.59% at 50% -8.47%, rgba(99, 50, 50, 0.00) 50.48%, rgba(139, 41, 138, 0.20) 56.25%, rgba(140, 90, 90, 0.00) 59.13%), linear-gradient(180deg, rgba(252, 100, 100, 0.00) 0%, rgba(150, 59, 59, 0.20) 92.1%), #030132;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+}

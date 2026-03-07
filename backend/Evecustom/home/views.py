@@ -9,3 +9,6 @@ def participantsignup(request):
 
 def hostlogin(request):
     return render(request, 'hostlogin.html') 
+
+def signupportal(request):
+    return render(request, 'signupportal.html')
