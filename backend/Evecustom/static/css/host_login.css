@@ -74,6 +74,20 @@ input:focus {
 
 }
 
+.box1 {
+    color: #0C016A;
+    font-family: "Readex Pro";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.box1 a {
+    color: #0C016A;
+    text-decoration: none;
+    font-weight: bold;
+}
 
 
 
@@ -100,8 +114,15 @@ button:hover {
 
 }
 
-.box1 a {
-    color: #0C016A;
-    text-decoration: none;
-    font-weight: bold;
+select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    outline: none;
+}
+
+select:focus {
+    border-color: #4e73df;
 }

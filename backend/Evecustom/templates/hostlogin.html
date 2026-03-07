@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Host Login</title>
+    <link rel="stylesheet" href="{% static 'css/host_login.css' %}">
+</head>
+
+<body>
+
+    <body class="c">
+        <div> <img src="{% static 'images/calender.png' %}" width="300px" height="300px" style="margin-top: 300px;">
+        </div>
+        <div class="box">
+
+            <div>
+                <h1>Login to Account</h1>
+                <form>
+                    <label>Email:</label>
+                    <input type="text" placeholder="enter email"><br>
+                    <label>Password:</label>
+                    <input type="text" placeholder="enter password"><br>
+
+
+                    <select name="role" id="role">
+                        <option value="host">Host</option>
+                        <option value="user">User</option>
+                    </select><br>
+                    <button type="submit">Login</button><br>
+
+                </form><br>
+
+                <div class="box1">
+                    <p>Don't have an account?
+                        <a href="#">Sign Up</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+
+    </body>
+
+</html>
