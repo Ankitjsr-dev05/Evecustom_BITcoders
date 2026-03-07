@@ -123,3 +123,5 @@ def otp(request):
                 return JsonResponse({"status": "error"})
     return render(request, 'otp.html')
 
+def participantsignup(request):
+    return render(request, 'participantsignup.html')
