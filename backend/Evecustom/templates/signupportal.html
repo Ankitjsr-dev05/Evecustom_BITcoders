@@ -6,17 +6,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
-    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="stylesheet" href="{% static 'css/signupportal.css' %}">
 </head>
 
 <body>
 
     <h1>Welcome User!</h1>
-    <h2>Enter your preference:</h2>
+    <h2>Sign-up as:</h2>
 
     <div class="container">
-        <button onclick="location.href='{% url "hostlogin" %}'">Login</button>
-        <button onclick="location.href='{% url "signupportal" %}'">Sign-up</button>
+        <button onclick="location.href='#'">HOST</button>
+        <button onclick="location.href='{% url "participantsignup" %}'">PARTICIPANT</button>
     </div>
 
     <img src="{% static 'images/pic1.png' %}" alt="Landing Image" class="landing-image">  
