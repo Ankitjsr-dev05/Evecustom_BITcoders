@@ -13,5 +13,6 @@ urlpatterns = [
     path('otp/', views.otp, name='otp'),
     path('hostdash/', views.hostdash, name='hostdash'),
     path('eventwise/<int:id>/',views.eventwise, name='eventwise'),
+    path('otp_verification_team/', views.otp_verification_team, name='otp_verification_team'),
 
 ]

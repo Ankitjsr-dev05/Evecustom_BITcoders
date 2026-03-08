@@ -1,5 +1,6 @@
 from django import template
 from django.shortcuts import get_object_or_404, redirect, render
+from httpcore import request
 from .utils import *
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password,check_password
@@ -237,6 +238,7 @@ def otp(request):
                 return JsonResponse({"status": "success"})
             else:
                 return JsonResponse({"status": "error"})
+            
     return render(request, 'otp.html')
 
 def login(request):
@@ -294,7 +296,86 @@ def partdas(request):
     data={'events':events, 'User':User}
     return render(request, 'partdas.html',data)
 
+def otp_verification_team(request):
+    if 'team_data' not in request.session or 'otp' not in request.session:
+        return render(request, 'createteam.html')
+    if request.method == 'POST':
+        entered_otp = request.POST.get('otp')
+        session_otp = request.session.get('otp')
+        role=request.session['team_data']['role']
+        if role == 'CreateTeam':
+            if entered_otp == session_otp:
+                team_data = request.session.get('team_data')
+                event_name = team_data['event']
+                event = Event.objects.get(name=event_name)
+                username = ParticipantProfile.objects.get(username=team_data['username'])
+                team_code = team_data['team_code']
+                team_name = team_data['team_name']
+                team_leader = team_data['team_leader']
+                email = team_data['email']
+                github_account = team_data['github_account']
+                team_members = team_data['team_members']
+                tnc = team_data['tnc']
 
+                createteam_obj = CreateTeam(
+                    event=event,
+                    username=username,
+                    team_code=team_code,
+                    team_name=team_name,
+                    team_leader=team_leader,
+                    email=email,
+                    gitaccount=github_account,
+                    team_members=team_members,
+                    tnc=tnc
+                )
+                createteam_obj.save()
+
+                del request.session['team_data']
+                del request.session['otp']
+                return JsonResponse({"status": "success"})
+            else:
+                return JsonResponse({"status": "error"})
+        if role == 'JoinTeam':
+            if entered_otp == session_otp:
+                team_data = request.session.get('team_data')
+                event_name = team_data['event']
+                event = Event.objects.get(name=event_name)
+                username = ParticipantProfile.objects.get(username=team_data['username'])
+                team_code = team_data['team_code']
+                team_name = team_data['team_name']
+                name = team_data['name']
+                email = team_data['email']
+                github_account = team_data['github_account']
+                tnc = team_data['tnc']
+
+                print(event,username)
+                jointeam_obj = JoinTeam(
+                    event=event,
+                    username=username,
+                    team_code=team_code,
+                    team_name=team_name,
+                    name=name,
+                    email=email,
+                    gitaccount=github_account,
+                    tnc=tnc
+                )
+                jointeam_obj.save()
+
+                del request.session['team_data']
+                del request.session['otp']
+                return JsonResponse({"status": "success"})
+            else:
+                return JsonResponse({"status": "error"})
+    return render(request, 'teamotp.html')
+
+
+
+def generate_team_code():
+    length = 8
+    while True:
+        team_code = ''.join(random.choices('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', k=length))
+        if not CreateTeam.objects.filter(team_code=team_code).exists():
+            return team_code
 
 def createteam(request,id):
     if 'user_id' not in request.session:
@@ -311,21 +392,30 @@ def createteam(request,id):
         tnc = request.POST.get('tnc') == 'on'
         if CreateTeam.objects.filter(team_name=team_name, event=event ).exists():
             return HttpResponse("Team name already exists for this event. Please choose a different team name.")
-        team_code = ''.join(random.choices('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', k=8))
-        # print(eventx,participant_profile)
-        createteam_obj = CreateTeam(
-            event=event,
-            username=participant_profile,
-            team_code=team_code,
-            team_name=team_name,
-            team_leader=team_leader_name,
-            email=email,
-            gitaccount=github_account,
-            team_members=team_members,
-            tnc=tnc
-        )
-        createteam_obj.save()
-        return HttpResponse("Team created successfully!")
+        team_code = generate_team_code()
+        print(event.name,participant_profile.username)
+
+        session_otp = str(random.randint(100000, 999999))
+        request.session['otp'] = session_otp
+
+        team_data = {
+            'role': 'CreateTeam',
+            'event': event.name,
+            'username': participant_profile.username,
+            'team_code': team_code,
+            'team_name': team_name,
+            'team_leader': team_leader_name,
+            'email': email,
+            'github_account': github_account,
+            'team_members': team_members,
+            'tnc': tnc
+        }
+        request.session['team_data'] = team_data
+
+        send_mail_maltialt(email, session_otp)
+
+        return render(request, 'teamotp.html')
+
     return render(request, 'createteam.html')
 
 def jointeam(request,id):
@@ -343,19 +433,28 @@ def jointeam(request,id):
 
         if not CreateTeam.objects.filter(team_code=team_code, event=event ).exists():
             return HttpResponse("Invalid team code for the selected event.")
+        
 
-        jointeam_obj = JoinTeam(
-            event=event,
-            username=participant_profile,
-            team_code=team_code,
-            team_name=CreateTeam.objects.get(team_code=team_code).team_name,
-            name=name,
-            email=email,
-            gitaccount=github_account,
-            tnc=tnc
-        )
-        jointeam_obj.save()
-        return HttpResponse("Joined team successfully!")
+        session_otp = str(random.randint(100000, 999999))
+        request.session['otp'] = session_otp
+        print(event.name,participant_profile.username)
+
+        team_data = {
+            'role': 'JoinTeam',
+            'event': event.name,
+            'username': participant_profile.username,
+            'team_code': team_code,
+            'team_name': CreateTeam.objects.get(team_code=team_code).team_name,
+            'name': name,
+            'email': email,
+            'github_account': github_account,
+            'tnc': tnc
+        }
+        request.session['team_data'] = team_data
+
+        send_mail_maltialt(email, session_otp)
+
+        return render(request, 'teamotp.html')
     return render(request, 'jointeam.html')
 
 def eventwise(request,id):
