@@ -14,3 +14,5 @@ def createteam(request):
     return render(request, 'createteam.html')
 def aboutus(request):
     return render(request, 'aboutus.html')
+def achie(request):
+    return render(request, 'achie.html')
