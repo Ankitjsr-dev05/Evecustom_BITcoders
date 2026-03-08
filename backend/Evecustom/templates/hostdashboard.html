@@ -14,21 +14,25 @@
     <div class='header'>
         <a href='#'>Home</a>
 
-        <select name="Events" id="Events">
+        <select id="Events" onchange="showEvents()">
             <option value="upcoming">Upcoming Events</option>
+            <option value="live">Live Events</option>
             <option value="past">Past Events</option>
-            <option value="Live">Live Events</option>
         </select>
 
-        <a href="#">
-            <h4 class='c'>About Us</h4>
-        </a>
+       
+            <h4 class='c'> <a href="{% url 'aboutus' %}">About Us</a></h4>
+        
         <a href="#">
             <h4 class='d'>Contact Us</h4>
         </a>
 
-        <button type="button">Create Event</button>
-        <button type="button">Logout</button>
+        <a href="{% url 'createvent' %}">
+            <button type="button">Create Event</button>
+        </a>
+        <a href="{% url 'logout' %}">
+            <button type="button">Logout</button>
+        </a>
     </div>
 
 
@@ -39,13 +43,13 @@
             <img src="{% static 'images/profile.png' %}" alt="Profile Picture"
                 style="width: 100px; height: 100px; border-radius: 50%; margin-bottom: 10px;">
             <label for="name">Name:</label>
-            <input type="text" id="name" name="name" value="John Doe" readonly
+            <input type="text" id="name" name="name" value="{{ host.username }}" readonly
                 style="width: 100%; padding: 8px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px;">
             <label for="phone">Phone number:</label>
-            <input type="tel" id="phone" name="phone" value="123-456-7890" readonly
+            <input type="tel" id="phone" name="phone" value="{{ host.phone }}" readonly
                 style="width: 100%; padding: 8px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px;">
             <label for="email">Email:</label>
-            <input type="email" id="email" name="email" value="john.doe@example.com" readonly
+            <input type="email" id="email" name="email" value="{{ host.email }}" readonly
                 style="width: 100%; padding: 8px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px;">
         </div>
 
@@ -56,21 +60,69 @@
                 <h2>Event status</h2>
             </div>
 
-            <div id="eventview" class="box2">
+        <div id="eventview" class="box2">
+
+            <div id="upcoming" class="event-section">
+                {% for event in upcoming_events %}
                 <div class="eventbox">
-                    <h3>Event 1</h3>
-                    <p>Status: Upcoming</p>
-                    <button type="button">View</button>
+                    <h3>{{event.name}}</h3>
+                    <p>location: {{event.location}}</p>
+                    <p>Status:🟢 Upcoming</p>
+                    
+                     <button><a href="#">View</a></button>
+                    
                 </div>
+                {% endfor %}
+
+            </div>
+
+
+                <div id="live" class="event-section" style="display:none;">
+                
+                {% for event in live_events %}
                 <div class="eventbox">
-                    <h3>Event 2</h3>
-                    <p>Status: Live</p>
-                    <button type="button">View</button>
+                    <h3>{{event.name}}</h3>
+                    <p>location: {{event.location}}</p>
+                    <p>Status: 🔴 Live</p>
+                    
+                    <button><a href="#">View</a></button>
+                    
+                </div>
+                {% endfor %}
+
+                </div>
+
+
+                <div id="past" class="event-section" style="display:none;">
+                
+                {% for event in past_events %}
+                <div class="eventbox">
+                    <h3>{{event.event_name}}</h3>
+                    <p>Status:⚫ Past</p>
+                    <button>View</button>
+                </div>
+                {% endfor %}
+
                 </div>
             </div>
         </div>
 
     </div>
+
+<script>
+
+function showEvents(){
+
+    let value = document.getElementById("Events").value
+
+    document.getElementById("upcoming").style.display="none"
+    document.getElementById("live").style.display="none"
+    document.getElementById("past").style.display="none"
+
+    document.getElementById(value).style.display="block"
+}
+
+</script>
 </body>
 
 </html>

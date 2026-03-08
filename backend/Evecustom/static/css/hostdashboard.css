@@ -3,16 +3,17 @@
     align-items: center;
     font-size: 22px;
     font-family: roboto;
-    padding: 10px;
-    gap: 130px;
+    padding: 5px;
+    gap: 100px;
     background: #D9D9D9;
-    margin: 0;
+    margin: -10px -10px 0px -8px;
     border: 0;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.81);
+    box-shadow: 9px 15px 15px rgba(0, 0, 0, 0.81);
+    height: 50px;
 }
 
 .c{
-    margin-left: 220px;
+    margin-left: 350px;
 }
 
 .container {
@@ -90,7 +91,7 @@ body {
 
 .box1 input[readonly] {
     background-color: #f9f9f9;
-    color: #555;
+    color: #090909;
 }
 
 .eventbox {
