@@ -522,3 +522,9 @@ def createvent(request):
         return redirect('hostdash')
 
     return render(request, 'createvent.html')
+
+def hostsignup(request):
+    return render(request, 'hostsignup.html')
+
+def hostdashboard(request):
+    return render(request, 'hostdashboard.html')

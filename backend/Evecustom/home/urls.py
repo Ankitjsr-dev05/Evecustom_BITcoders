@@ -20,4 +20,6 @@ urlpatterns = [
     path('eventdetails/<int:id>/', views.eventdetails, name='eventdetails'),
     path('logout/', views.logout, name='logout'),
     path('createvent/', views.createvent, name='createvent'),
+    path('hostdashboard/', views.hostdashboard, name='hostdashboard'),
+
 ]
