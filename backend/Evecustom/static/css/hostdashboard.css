@@ -12,8 +12,8 @@
     height: 50px;
 }
 
-.c{
-    margin-left: 350px;
+.c {
+    margin-left: 400px;
 }
 
 .container {
@@ -117,7 +117,7 @@ button:active {
     transition: 0.3s;
 }
 
-.box2{
+.box2 {
     display: flex;
     justify-content: center;
     gap: 20px;
@@ -125,9 +125,20 @@ button:active {
 }
 
 .eventbox {
-    width: 300px;
+    width: 400px;
+    display: flex;
+    flex-wrap: wrap;
     height: 150px;
+    margin-bottom: 20px;
     overflow: auto;
+    align-content: stretch;
+    flex-wrap: wrap;
+}
+
+.event-section {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 30px;
 }
 
 .box2::-webkit-scrollbar {
@@ -148,7 +159,7 @@ button:active {
     background: #555;
 }
 
-.right-box{
+.right-box {
     display: flex;
     flex-direction: column;
     align-items: center;

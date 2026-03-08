@@ -2,7 +2,7 @@ from datetime import datetime
 
 from django import template
 from django.shortcuts import get_object_or_404, redirect, render
-from httpcore import request
+# from httpcore import request
 from .utils import *
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password,check_password
@@ -14,6 +14,7 @@ from participant.models import createteam as CreateTeam, jointeam as JoinTeam
 import os
 from PIL import Image, ImageDraw, ImageFont
 import qrcode
+  
   
 
 def generate_id_card(idc):
