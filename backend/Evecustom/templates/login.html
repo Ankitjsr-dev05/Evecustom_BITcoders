@@ -18,17 +18,19 @@
 
             <div>
                 <h1>Login to Account</h1>
-                <form>
+                <form method="post" action="{% url 'login' %}">
+                    {% csrf_token %}
                     <label>Email:</label>
-                    <input type="text" placeholder="enter email"><br>
+                    <input type="text" placeholder="enter email" id="email" name="email"><br>
                     <label>Password:</label>
-                    <input type="text" placeholder="enter password"><br>
+                    <input type="text" placeholder="enter password" id="password" name="password"><br>
 
 
                     <select name="role" id="role">
-                        <option value="host">Host</option>
-                        <option value="user">User</option>
+                        <option value="Host">Host</option>
+                        <option value="Participant">Participant</option>
                     </select><br>
+
                     <button type="submit">Login</button><br>
 
                 </form><br>

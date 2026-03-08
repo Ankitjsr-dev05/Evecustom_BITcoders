@@ -1,0 +1,117 @@
+
+        /* Body Background */
+        body {
+            margin: 0;
+            height: 100%;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #d6d8e4, #e5eaf0);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Main Container */
+        .dashboard {
+            width: 100%;
+            min-height: 90vh;
+            background: rgb(189, 202, 218);
+            
+            box-shadow: 0 10px 30px rgba(230, 92, 200, 0.2);
+            overflow: hidden;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background: #f4f4f4;
+        }
+
+        /* Logout Button */
+        .logout-btn {
+            background: #9781f7;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .logout {
+            background: #9781f7;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-left: 950px;
+        }
+
+        .logout:hover {
+            background: #5f1bce;
+            transform: scale(1.05);
+        }
+
+        .logout-btn:hover {
+            background: #5f1bce;
+            transform: scale(1.05);
+        }
+
+        /* Content */
+        .content {
+            padding: 30px;
+            
+        }
+
+        /* Events Section */
+        .events-container {
+            
+            display: flex;
+            height: 30%;
+        }
+
+        /* Event Card */
+        .event-card {
+            width: 30%;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(27, 18, 141, 0.1);
+            transition: 0.3s;
+        }
+
+        .event-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .view-btn {
+            margin-top: 10px;
+            padding: 8px 15px;
+            border: none;
+            background: #457b9d;
+            color: white;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .view-btn:hover {
+            background: #1d3557;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 15px;
+            height:30px;
+            width: 100%;
+            background: #464444;
+            color: #f4f4f4;
+        }
+
+    

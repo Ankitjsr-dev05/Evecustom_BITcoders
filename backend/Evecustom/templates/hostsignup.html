@@ -19,27 +19,29 @@
 
         <div>
             <h1>Create New Account</h1>
-            <form>
-                <label>Name:</label>
-                <input type="text" placeholder="enter your name"><br>
+            <form method="post" action="{% url 'hostsignup' %}">
+                {% csrf_token %}
+                <label>User Name:</label>
+                <input type="text" id="username" name="username" placeholder="enter your username"><br>
                 <label>Email:</label>
-                <input type="text" placeholder="enter email">
+                <input type="text" id="email" name="email" placeholder="enter email">
                 <label>Phone no:</label>
-                <input type="text" placeholder="enter phone number"><br>
+                <input type="text" id="phone" name="phone" placeholder="enter phone number"><br>
                 <label>Organisation:</label>
-                <input type="text" placeholder="enter organising firm"><br>
+                <input type="text" id="organisation" name="organisation" placeholder="enter organising firm"><br>
                 <label>Password:</label>
-                <input type="text" placeholder="enter password"><br>
+                <input type="text" id="password" name="password" placeholder="enter password"><br>
                 <label>Confirm Password:</label>
-                <input type="text" placeholder="confirm password"><br>
+                <input type="text" id="confirm_password" name="confirm_password" placeholder="confirm password"><br>
+                <button type="submit">Sign-up</button><br>
             </form><br>
 
             <div class="box1">
                 <h3>Already have an account?
-                    <a href="{% url 'hostlogin' %}">Login</a>
+                    <a href="{% url 'login' %}">Login</a>
                 </h3>
             </div>
-            <button type="submit">Sign-up</button><br>
+            
             
         </div>
     </div>

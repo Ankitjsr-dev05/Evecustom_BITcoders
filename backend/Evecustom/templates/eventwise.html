@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <title>Dashboard</title>
+<link rel="stylesheet" href="{% static 'css/eventwise.css' %}">
+</head>
+
+<body>
+    
+
+<div class="dashboard">
+    
+    <div class="header">
+        <h2 style="color: #4d237a;">{{ event.name }}</h2>
+        <a href="{% url 'createteam' event.id %}"><button class="logout-btn">create team</button></a>
+        <a href="{% url 'jointeam' event.id %}"><button class="logout-btn">join team</button></a>
+    </div>
+
+    <div class="content">
+        
+
+        
+
+        <div class="events-container">
+            <div >
+                <h4>Details</h4>
+                <p>{{ event.description }}</p>
+                
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <div class="footer">
+        @Copyright
+    </div>
+
+
+
+</body>
+</html>
+

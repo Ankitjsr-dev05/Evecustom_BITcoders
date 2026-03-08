@@ -1,9 +1,8 @@
 from django.db import models
 from home.models import ParticipantProfile
-from host.models import Event
 
 class createteam(models.Model):
-    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    event = models.ForeignKey('host.Event', on_delete=models.CASCADE)
     username= models.ForeignKey(ParticipantProfile, on_delete=models.CASCADE)
     team_code= models.CharField(max_length=8, unique=True)
     team_name = models.CharField(max_length=100)
@@ -16,7 +15,7 @@ class createteam(models.Model):
         return f"{self.event} - {self.team_name} ({self.team_code})"
 
 class jointeam(models.Model):
-    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    event = models.ForeignKey('host.Event', on_delete=models.CASCADE)
     username= models.ForeignKey(ParticipantProfile, on_delete=models.CASCADE)
     team_code= models.CharField(max_length=8)
     team_name = models.CharField(max_length=100)

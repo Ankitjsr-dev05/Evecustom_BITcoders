@@ -1,5 +1,6 @@
 from django.db import models
-from home.models import HostProfile
+from home.models import HostProfile, ParticipantProfile
+
 
 class Event(models.Model):
     host = models.ForeignKey(HostProfile, on_delete=models.CASCADE)
@@ -11,3 +12,4 @@ class Event(models.Model):
     
     def __str__(self):
         return self.name
+    
