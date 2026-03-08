@@ -14,5 +14,7 @@ urlpatterns = [
     path('hostdash/', views.hostdash, name='hostdash'),
     path('eventwise/<int:id>/',views.eventwise, name='eventwise'),
     path('otp_verification_team/', views.otp_verification_team, name='otp_verification_team'),
-
+    path('aboutus/', views.aboutus, name='aboutus'),
+    path('achie/', views.achie, name='achie'),
+    path('certi/', views.certi, name='certi'),
 ]

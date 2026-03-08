@@ -464,3 +464,10 @@ def eventwise(request,id):
     User=ParticipantProfile.objects.get(id=request.session['user_id'])
     data={'event':event, 'User':User}
     return render(request, 'eventwise.html', data)
+
+def aboutus(request):
+    return render(request, 'aboutus.html')
+def achie(request):
+    return render(request, 'achie.html')
+def certi(request):
+    return render(request, 'certi.html')
