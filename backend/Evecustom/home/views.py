@@ -15,3 +15,6 @@ def signupportal(request):
 
 def hostsignup(request):
     return render(request, 'hostsignup.html')
+
+def hostdashboard(request):
+    return render(request, 'hostdashboard.html')

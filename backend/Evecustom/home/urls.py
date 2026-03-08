@@ -7,5 +7,6 @@ urlpatterns = [
     path('hostlogin/', views.hostlogin, name='hostlogin'),
     path('signupportal/', views.signupportal, name='signupportal'),
     path('hostsignup/', views.hostsignup, name='hostsignup'),
+    path('hostdashboard/', views.hostdashboard, name='hostdashboard'),
 
 ]
