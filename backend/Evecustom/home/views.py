@@ -16,3 +16,5 @@ def aboutus(request):
     return render(request, 'aboutus.html')
 def achie(request):
     return render(request, 'achie.html')
+def certi(request):
+    return render(request, 'certi.html')
