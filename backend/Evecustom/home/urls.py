@@ -17,4 +17,7 @@ urlpatterns = [
     path('aboutus/', views.aboutus, name='aboutus'),
     path('achie/', views.achie, name='achie'),
     path('certi/', views.certi, name='certi'),
+    path('eventdetails/<int:id>/', views.eventdetails, name='eventdetails'),
+    path('logout/', views.logout, name='logout'),
+    path('createvent/', views.createvent, name='createvent'),
 ]

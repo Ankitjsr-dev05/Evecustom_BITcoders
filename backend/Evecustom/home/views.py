@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django import template
 from django.shortcuts import get_object_or_404, redirect, render
 from httpcore import request
@@ -278,9 +280,16 @@ def hostdash(request):
     host_id = request.session['host_id']
     host_profile = HostProfile.objects.get(id=host_id)
     events = Event.objects.filter(host=host_profile)
+    now= datetime.now()
+    upcoming_events = events.filter(start_datetime__gt=now)
+    live_events = events.filter(start_datetime__lte=now, end_datetime__gte=now)
+    past_events = events.filter(end_datetime__lt=now)
     data = {
         'host': host_profile,
-        'events': events
+        'events': events,
+        'upcoming_events': upcoming_events,
+        'live_events': live_events,
+        'past_events': past_events
     }
     return render(request, 'hostdash.html', data)
 
@@ -471,3 +480,45 @@ def achie(request):
     return render(request, 'achie.html')
 def certi(request):
     return render(request, 'certi.html')
+
+def eventdetails(request, id):
+    event = get_object_or_404(Event, id=id)
+    create_team= CreateTeam.objects.filter(event=event)
+    join_team= JoinTeam.objects.filter(event=event)
+    data = {
+        'event': event,
+        'create_team': create_team,
+        'join_team': join_team
+    }
+    return render(request, 'eventdetails.html', data)  
+
+def logout(request):
+    request.session.flush()
+    return redirect('home')
+
+def createvent(request):
+    if 'host_id' not in request.session:
+        return redirect('login')
+    host_id = request.session['host_id']
+    host_profile = HostProfile.objects.get(id=host_id)
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        description = request.POST.get('description')
+        start_datetime = request.POST.get('start_datetime') 
+        end_datetime = request.POST.get('end_datetime')
+        prize = request.POST.get('prize')
+        location = request.POST.get('location')
+
+        event = Event(
+            host=host_profile,
+            name=name,
+            description=description,
+            start_datetime=start_datetime,
+            end_datetime=end_datetime,
+            prize=prize,
+            location=location
+        )
+        event.save()
+        return redirect('hostdash')
+
+    return render(request, 'createvent.html')

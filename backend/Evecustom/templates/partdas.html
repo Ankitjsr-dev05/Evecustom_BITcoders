@@ -16,10 +16,18 @@
         <div class="header">
             <h2 class="a">Home</h2>
             
-            <h3 class="c">About Us</h3>
-            <h3 class="d">Contact Us</h3>
-            <button class="log">Achievements</button>
-            <button class="logout-btn">Log out</button>
+            <a href="{% url 'aboutus' %}">
+                <h3 class="c">About Us</h3>
+            </a>
+                <h3 class="d">Contact Us</h3>
+            
+            <a href="{% url 'achie' %}">
+                <button class="log">Achievements</button>
+            </a>
+
+            <a href="{% url 'logout' %}">
+                <button class="logout-btn">Log out</button>
+            </a>
         </div>
 
         <div class="content">
