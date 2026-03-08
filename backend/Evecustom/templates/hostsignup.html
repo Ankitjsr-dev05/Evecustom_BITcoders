@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>signin page</title>
+    <link rel="stylesheet" href="{% static 'css/signup.css' %}">
+
+</head>
+
+ 
+
+<body class="c">
+    <div> <img src="{% static 'images/calender.png' %}" width="300px" height="300px" style="margin-top: 300px;">
+    </div>
+    <div class="box">
+
+        <div>
+            <h1>Create New Account</h1>
+            <form method="post" action="{% url 'hostsignup' %}">
+                {% csrf_token %}
+                <label>User Name:</label>
+                <input type="text" id="username" name="username" placeholder="enter your username"><br>
+                <label>Email:</label>
+                <input type="text" id="email" name="email" placeholder="enter email">
+                <label>Phone no:</label>
+                <input type="text" id="phone" name="phone" placeholder="enter phone number"><br>
+                <label>Organisation:</label>
+                <input type="text" id="organisation" name="organisation" placeholder="enter organising firm"><br>
+                <label>Password:</label>
+                <input type="text" id="password" name="password" placeholder="enter password"><br>
+                <label>Confirm Password:</label>
+                <input type="text" id="confirm_password" name="confirm_password" placeholder="confirm password"><br>
+                <button type="submit">Sign-up</button><br>
+            </form><br>
+
+            <div class="box1">
+                <h3>Already have an account?
+                    <a href="{% url 'login' %}">Login</a>
+                </h3>
+            </div>
+            
+            
+        </div>
+    </div>
+
+</body>
+
+</html>

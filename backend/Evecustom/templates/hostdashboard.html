@@ -1,0 +1,128 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Host Dashboard</title>
+    <link rel="stylesheet" href="{% static 'css/hostdashboard.css' %}">
+</head>
+
+<body>
+
+    <div class='header'>
+        <a href="{% url 'gohome' %}">Home</a>
+
+        <select id="Events" onchange="showEvents()">
+            <option value="upcoming">Upcoming Events</option>
+            <option value="live">Live Events</option>
+            <option value="past">Past Events</option>
+        </select>
+
+       
+            <h4 class='c'> <a href="{% url 'aboutus' %}">About Us</a></h4>
+        
+        <a href="{% url 'contactus' %}">
+            <h4 class='d'>Contact Us</h4>
+        </a>
+
+        <a href="{% url 'createvent' %}">
+            <button type="button">Create Event</button>
+        </a>
+        <a href="{% url 'logout' %}">
+            <button type="button">Logout</button>
+        </a>
+    </div>
+
+
+    <div id="container" style="display: flex; align-items: stretch;">
+
+        <div class="box1" style="width: 650px; padding: 20px; border: 1px solid #ccc; border-radius: 8px;">
+            <h2>My profile</h2>
+            <img src="{% static 'images/profile.png' %}" alt="Profile Picture"
+                style="width: 100px; height: 100px; border-radius: 50%; margin-bottom: 10px;">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" value="{{ host.username }}" readonly
+                style="width: 100%; padding: 8px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px;">
+            <label for="phone">Phone number:</label>
+            <input type="tel" id="phone" name="phone" value="{{ host.phone }}" readonly
+                style="width: 100%; padding: 8px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px;">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" value="{{ host.email }}" readonly
+                style="width: 100%; padding: 8px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px;">
+        </div>
+
+
+        <div class="right-box" style="width: 1300px; padding: 20px; border: 1px solid #ccc; border-radius: 8px;">
+
+            <div class="event-title">
+                <h2>Event status</h2>
+            </div>
+
+        <div id="eventview" class="box2">
+
+            <div id="upcoming" class="event-section">
+                {% for event in upcoming_events %}
+                <div class="eventbox">
+                    <h3>{{event.name}}</h3>
+                    <p>location: {{event.location}}</p>
+                    <p>Status:🟢 Upcoming</p>
+                    
+                     <button><a href="{% url 'hosteventpage' event.id %}">View</a></button>
+                    
+                </div>
+                {% endfor %}
+
+            </div>
+
+
+                <div id="live" class="event-section" style="display:none;">
+                
+                {% for event in live_events %}
+                <div class="eventbox">
+                    <h3>{{event.name}}</h3>
+                    <p>location: {{event.location}}</p>
+                    <p>Status: 🔴 Live</p>
+                    
+                    <button><a href="{% url 'hosteventpage' event.id %}">View</a></button>
+                    
+                </div>
+                {% endfor %}
+
+                </div>
+
+
+                <div id="past" class="event-section" style="display:none;">
+                
+                {% for event in past_events %}
+                <div class="eventbox">
+                    <h3>{{event.event_name}}</h3>
+                    <p>Status:⚫ Past</p>
+                    <button>View</button>
+                </div>
+                {% endfor %}
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+<script>
+
+function showEvents(){
+
+    let value = document.getElementById("Events").value
+
+    document.getElementById("upcoming").style.display="none"
+    document.getElementById("live").style.display="none"
+    document.getElementById("past").style.display="none"
+
+    document.getElementById(value).style.display="block"
+}
+
+</script>
+</body>
+
+</html>

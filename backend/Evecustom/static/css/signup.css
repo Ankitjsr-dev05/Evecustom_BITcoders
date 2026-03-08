@@ -1,0 +1,108 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #4e73df, #97c2b2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+}
+
+.container {
+    background: white;
+    padding: 30px 40px;
+    width: 700px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+    text-align: center;
+    color: #030132;
+
+    margin-bottom: 10px;
+}
+
+h2 {
+    text-align: center;
+    font-size: 14px;
+    color: rgb(57, 3, 68);
+    margin-bottom: 20px;
+}
+
+label {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+input[type="text"],
+input[type="email"] {
+    width: 100%;
+    padding: 8px;
+    margin: 6px 0 12px 0;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    outline: none;
+}
+
+input:focus {
+    border-color: #4e73df;
+}
+
+.member-row {
+    display: flex;
+    gap: 10px;
+}
+
+.member-row input {
+    width: 100%;
+}
+
+.box {
+    background-color: whitesmoke;
+    padding: 200px;
+    width: 400px;
+    margin-top: 40px;
+    border-radius: 10px;
+    box-shadow: #4e73df;
+    text-align: left;
+}
+
+.box {
+    display: flex;
+
+}
+
+
+
+
+button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 15px;
+    background-color: #4e73df;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: #2e59d9;
+}
+
+.c {
+    background: linear-gradient(0deg, #030132, #030132),
+        linear-gradient(180deg, rgba(252, 100, 100, 0) 0%, rgba(43, 21, 21, 0.2) 92.1%);
+
+}
+
+.box1 a {
+    color: #0C016A;
+    text-decoration: none;
+    font-weight: bold;
+}

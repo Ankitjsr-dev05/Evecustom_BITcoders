@@ -1,0 +1,52 @@
+{% load static %}
+<html>
+<head>
+    <title>Create Team</title>
+    <link rel="stylesheet"  href="{% static 'css/create.css' %}">
+
+     
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>CREATE TEAM</h1>
+    <h2>Create your own team for Event 1</h2>
+
+<form action="" method="post">
+{% csrf_token %}
+    <label>Team Name:</label>
+    <input type="text" name="team_name" id="team_name">
+
+    <label>Team Leader Name:</label>
+    <input type="text" name="team_leader_name" id="team_leader_name">
+
+    <label>Email:</label>
+    <input type="email" name="email" id="email">
+
+    <label>GitHub Account:</label>
+    <input type="text" name="github_account" id="github_account">
+
+    <label>Team Members:</label>
+    <div class="member-row">
+    <textarea class="member-row" id="team_members" name="team_members" placeholder="UserName of members seperated by commas"
+     rows="3" cols="90"></textarea>
+    </div>
+
+        <div>
+            <input type="checkbox" id="tnc" name="tnc" required>
+            <label for="terms">I agree to terms & conditions</label>
+        </div>
+        <div><button type="submit">create team</button></div>
+        </div>
+
+        </div>
+
+
+    </form>
+        
+
+    </div>
+</body>
+</html>

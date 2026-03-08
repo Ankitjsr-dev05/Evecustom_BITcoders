@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'home',
+    'host',
+    'participant',
 ]
 
 MIDDLEWARE = [
@@ -127,4 +130,4 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'studentdashboardbit@gmail.com'
 EMAIL_HOST_PASSWORD = 'xsix mibp riko xxoe'
-DEFAULT_FROM_EMAIL = 'BITcoders <no_reply@domain.com>'
+DEFAULT_FROM_EMAIL = 'Evecustom_BITcoders <no_reply@domain.com>'
