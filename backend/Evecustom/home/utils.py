@@ -73,7 +73,64 @@ def send_mail_maltialt(email, otp="555555"):
     except Exception as e:
         print("Failed to send email:", str(e))
 
+def send_create_team_mail(email, team_name, team_code, event_name):
+    try:
+        subject = "Team Created Successfully"
 
+        message = f"""
+                  Hello Team Leader,
+
+                  Your team has been created successfully.
+
+                  Event Name : {event_name}
+                  Team Name  : {team_name}
+                  Team Code  : {team_code}
+
+                  Share this team code with your teammates so they can join your team.
+
+                  Good luck for the event 🚀
+
+                  Regards,
+                  Event Management Team
+                  """
+        from_email = settings.DEFAULT_FROM_EMAIL
+        recipient_list = [email]
+        email_message = EmailMultiAlternatives(subject, message, from_email, recipient_list)
+        email_message.content_subtype = "html"  # Set the content type to HTML
+        email_message.send()
+        print("Email sent successfully", email)   
+    except Exception as e:
+        print("Failed to send email:", str(e))
+    print("Join team email sent successfully")
+
+def send_join_team_mail(email, team_name, team_code, event_name):
+    try:
+        subject = "Joined Team Successfully"
+
+        message = f"""
+                  Hello Participant,
+
+                  You have successfully joined the team.
+
+                  Event Name : {event_name}
+                  Team Name  : {team_name}
+                  Team Code  : {team_code}
+
+                  Good luck for the event 🚀
+
+                  Regards,
+                  Event Management Team
+                  """
+        from_email = settings.DEFAULT_FROM_EMAIL
+        recipient_list = [email]
+        email_message = EmailMultiAlternatives(subject, message, from_email, recipient_list)
+        email_message.content_subtype = "html"  # Set the content type to HTML
+        email_message.send()
+        print("Email sent successfully", email)   
+    except Exception as e:
+        print("Failed to send email:", str(e))
+    print("Join team email sent successfully")
+    
 def sending_otp_mail(email, otp):
     try:
         subject = "Email Verification"

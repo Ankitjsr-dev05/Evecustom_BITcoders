@@ -329,7 +329,7 @@ def otp_verification_team(request):
                     tnc=tnc
                 )
                 createteam_obj.save()
-
+                send_create_team_mail(email, team_name, team_code, event_name)
                 del request.session['team_data']
                 del request.session['otp']
                 return JsonResponse({"status": "success"})
@@ -360,7 +360,7 @@ def otp_verification_team(request):
                     tnc=tnc
                 )
                 jointeam_obj.save()
-
+                send_join_team_mail(email, team_name, team_code, event_name)
                 del request.session['team_data']
                 del request.session['otp']
                 return JsonResponse({"status": "success"})
