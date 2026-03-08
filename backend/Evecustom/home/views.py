@@ -18,3 +18,5 @@ def achie(request):
     return render(request, 'achie.html')
 def certi(request):
     return render(request, 'certi.html')
+def contactus(request):
+    return render(request, 'contactus.html')
