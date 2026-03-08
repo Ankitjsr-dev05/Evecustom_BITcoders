@@ -255,7 +255,7 @@ def login(request):
                 data={'Host':Host}
                 if check_password(password, Host.password):
                     request.session['host_id'] = Host.id
-                    return redirect('hostdash')
+                    return redirect('hostdashboard')
                 else:
                     return HttpResponse("Invalid host credentials.")
             else:
@@ -506,7 +506,7 @@ def createvent(request):
         description = request.POST.get('description')
         start_datetime = request.POST.get('start_datetime') 
         end_datetime = request.POST.get('end_datetime')
-        prize = request.POST.get('prize')
+        prize = request.POST.get('prize_details')
         location = request.POST.get('location')
 
         event = Event(
@@ -519,7 +519,7 @@ def createvent(request):
             location=location
         )
         event.save()
-        return redirect('hostdash')
+        return redirect('hostdashboard')
 
     return render(request, 'createvent.html')
 
@@ -527,4 +527,20 @@ def hostsignup(request):
     return render(request, 'hostsignup.html')
 
 def hostdashboard(request):
-    return render(request, 'hostdashboard.html')
+    if 'host_id' not in request.session:
+        return redirect('login')
+    host_id = request.session['host_id']
+    host_profile = HostProfile.objects.get(id=host_id)
+    events = Event.objects.filter(host=host_profile)
+    now= datetime.now()
+    upcoming_events = events.filter(start_datetime__gt=now)
+    live_events = events.filter(start_datetime__lte=now, end_datetime__gte=now)
+    past_events = events.filter(end_datetime__lt=now)
+    data = {
+        'host': host_profile,
+        'events': events,
+        'upcoming_events': upcoming_events,
+        'live_events': live_events,
+        'past_events': past_events
+    }
+    return render(request, 'hostdashboard.html', data)
