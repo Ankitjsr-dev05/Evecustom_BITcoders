@@ -22,5 +22,9 @@ urlpatterns = [
     path('createvent/', views.createvent, name='createvent'),
     path('hostdashboard/', views.hostdashboard, name='hostdashboard'),
     path('gohome/', views.gohome, name='gohome'),
+    path('eventpage/<int:id>/', views.eventpage, name='eventpage'),
+    path('hosteventpage/<int:id>/', views.hosteventpage, name='hosteventpage'),
+    path('contactus/', views.contactus, name='contactus'),
+
 
 ]

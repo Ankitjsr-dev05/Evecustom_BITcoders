@@ -491,7 +491,44 @@ def eventdetails(request, id):
         'create_team': create_team,
         'join_team': join_team
     }
-    return render(request, 'eventdetails.html', data)  
+    return render(request, 'eventdetails.html', data) 
+
+def eventpage(request, id):
+    event = get_object_or_404(Event, id=id)
+
+    create_team = CreateTeam.objects.filter(event=event)
+    join_team = JoinTeam.objects.filter(event=event)
+
+    teams = CreateTeam.objects.filter(event=event).values_list('team_members', flat=True)
+
+    team_members = []
+    for t in teams:
+        team_members.extend(t.split(','))
+
+    data = {
+        'User': ParticipantProfile.objects.get(id=request.session['user_id']),
+        'event': event,
+        'create_team': create_team,
+        'join_team': join_team,
+        'team_members': team_members
+    }
+
+    return render(request, 'eventpage.html', data)
+
+def hosteventpage(request,id):
+    event = get_object_or_404(Event, id=id)
+    create_team= CreateTeam.objects.filter(event=event)
+    join_team= JoinTeam.objects.filter(event=event)
+    data = {
+        'event': event,
+        'create_team': create_team,
+        'join_team': join_team
+    }
+
+    return render(request, 'hosteventpage.html', data)
+ 
+def contactus(request):
+    return render(request, 'contactus.html')
 
 def logout(request):
     request.session.flush()

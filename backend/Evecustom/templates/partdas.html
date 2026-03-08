@@ -19,7 +19,9 @@
             <a href="{% url 'aboutus' %}">
                 <h3 class="c">About Us</h3>
             </a>
+            <a href="{% url 'contactus' %}">
                 <h3 class="d">Contact Us</h3>
+            </a>
             
             <a href="{% url 'achie' %}">
                 <button class="log">Achievements</button>
@@ -41,7 +43,7 @@
                 <div class="event-card">
                     <h4>{{ event.name }}</h4>
                     <p>{{ event.description }}</p>
-                    <a href="{% url 'eventwise' event.id %}">
+                    <a href="{% url 'eventpage' event.id %}">
                 <button class="view-btn">View</button> </a>
                 </div>
                 {% empty %}

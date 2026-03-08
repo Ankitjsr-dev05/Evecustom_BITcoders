@@ -23,7 +23,7 @@
        
             <h4 class='c'> <a href="{% url 'aboutus' %}">About Us</a></h4>
         
-        <a href="#">
+        <a href="{% url 'contactus' %}">
             <h4 class='d'>Contact Us</h4>
         </a>
 
@@ -69,7 +69,7 @@
                     <p>location: {{event.location}}</p>
                     <p>Status:🟢 Upcoming</p>
                     
-                     <button><a href="#">View</a></button>
+                     <button><a href="{% url 'hosteventpage' event.id %}">View</a></button>
                     
                 </div>
                 {% endfor %}
@@ -85,7 +85,7 @@
                     <p>location: {{event.location}}</p>
                     <p>Status: 🔴 Live</p>
                     
-                    <button><a href="#">View</a></button>
+                    <button><a href="{% url 'hosteventpage' event.id %}">View</a></button>
                     
                 </div>
                 {% endfor %}
