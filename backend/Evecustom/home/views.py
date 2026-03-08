@@ -12,3 +12,5 @@ def jointeam(request):
     return render(request, 'jointeam.html')
 def createteam(request):
     return render(request, 'createteam.html')
+def aboutus(request):
+    return render(request, 'aboutus.html')

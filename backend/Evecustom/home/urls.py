@@ -7,4 +7,5 @@ urlpatterns = [
     path('partdas/', views.partdas, name='partdas'),
    path('jointeam/', views.jointeam, name='jointeam'),
    path('createteam/', views.createteam, name='createteam'),
+    path('aboutus/', views.aboutus, name='aboutus'),
 ]
