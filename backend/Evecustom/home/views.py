@@ -18,3 +18,6 @@ def hostsignup(request):
 
 def hostdashboard(request):
     return render(request, 'hostdashboard.html')
+
+def eventpage(request):
+    return render(request, 'eventpage.html')
