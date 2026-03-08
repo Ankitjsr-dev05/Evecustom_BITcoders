@@ -9,5 +9,6 @@ urlpatterns = [
     path('hostsignup/', views.hostsignup, name='hostsignup'),
     path('hostdashboard/', views.hostdashboard, name='hostdashboard'),
     path('eventpage/', views.eventpage, name='eventpage'),
+    path('hosteventpage/', views.hosteventpage, name='hosteventpage'),
 
 ]

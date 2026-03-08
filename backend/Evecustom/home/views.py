@@ -21,3 +21,6 @@ def hostdashboard(request):
 
 def eventpage(request):
     return render(request, 'eventpage.html')
+
+def hosteventpage(request):
+    return render(request, 'hosteventpage.html')
