@@ -9,14 +9,9 @@
     <link rel="stylesheet" href="{% static 'css/aboutus.css' %}">
 </head>
 <body>
-    <div class="header">
-            <h3 class="a">Home</h2>
-            <h3 class="e">Events</h3>
-            <h3 class="c">About Us</h3>
-            <h3 class="d">Contact Us</h3>
-            <button class="b">review button</button>
-            <button class="log">Achievements</button>
-            <button class="logout-btn">Log out</button>
+     <div class="header">
+            <a href="{% url 'gohome' %}"><h3 class="a">Home</h3></a>
+            <a href="{% url 'logout' %}"><button class="logout-btn">Log out</button></a>
         </div>
         <div class="p">
          <div><img src="{% static 'images/eve.jpg' %}" alt="eve" style="width: 200px; height: 200px; 

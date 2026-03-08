@@ -545,3 +545,10 @@ def hostdashboard(request):
         'past_events': past_events
     }
     return render(request, 'hostdashboard.html', data)
+
+def gohome(request):
+    if 'host_id' in request.session:
+        return redirect('hostdashboard')
+    elif 'user_id' in request.session:
+            return redirect('partdas')
+    return redirect('gohome')
